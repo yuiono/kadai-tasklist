@@ -15,9 +15,13 @@ Route::resource('tasks','TasksController');
 
 Route::get('/','TasksController@index');
 
-Route::get('/', function () {
-    return view('welcome');
+// omit
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
 });
+
 
 // user registration
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');

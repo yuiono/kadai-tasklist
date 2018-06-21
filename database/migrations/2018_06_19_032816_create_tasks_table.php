@@ -18,6 +18,9 @@ class CreateTasksTable extends Migration
             $table->string('content');
             $table->string('status',10);
             $table->timestamps();
+            
+            // Foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
